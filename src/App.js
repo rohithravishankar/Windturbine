@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import * as THREE from 'three'
+import { Suspense, useLayoutEffect, useRef, useAnimations } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { useGLTF, MeshReflectorMaterial, Environment, Stage, PresentationControls } from '@react-three/drei'
+import {Model} from './Wind'
 
-function App() {
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+    <Canvas dpr={[1, 2]} shadows camera={{ fov:45 }} style={{ "position": "absolute" }}>
+      <color attach="background" args={['#87CEEB']} />
+
+      <PresentationControls speed={1.5} global zoom={0.6} polar={[-0.1, Math.PI / 4]} >
+        <Stage environment={'sunset'} >
+        <Model scale={0.1} />
+        
+          
+
+        </Stage>
+
+      </PresentationControls>
+
+    </Canvas>
+  )
+}

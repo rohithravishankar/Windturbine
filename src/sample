@@ -1,0 +1,26 @@
+import { Canvas } from '@react-three/fiber';
+import { useGLTF, Stage, PresentationControls } from "@react-three/drei"
+import { Suspense } from "react"
+
+function Model(props) {
+  const { scene } = useGLTF("/bmw.glb");
+  return <primitive object={scene} {...props} />
+
+}
+
+function App() {
+  return (
+    <Suspense fallback={null}>
+      <Canvas dpr={[1,2]} shadows camera={{ fov: 45 }} style={{ "position": "absolute" }}>
+        <color attach="background" args={["#101610"]} />
+        <PresentationControls speed={1.5} global zoom={1} polar={[-10, Math.PI / 10]}>
+          <Stage environment={"sunset"} />
+          <Model scale={1} />
+        </PresentationControls>
+      </Canvas>
+    </Suspense>
+
+  );
+}
+
+export default App;
